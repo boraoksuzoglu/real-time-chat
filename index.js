@@ -234,7 +234,7 @@ server.listen(3000, async () => {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })
-    chatData.deleteMany({})
+    await chatData.deleteMany({})
 
 })
 
