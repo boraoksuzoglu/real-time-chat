@@ -93,6 +93,7 @@ wss.on('connection', function connection(ws, req) {
         if (jsonData.type == "message") {
 
             const {token,message} = jsonData.data
+            if (message.length < 1) return
             const userChat = await chatData.findOne({"users.token": token})
             const userInfo = userChat['users'].find(user => user.token == token)
 
