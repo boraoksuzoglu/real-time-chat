@@ -1,0 +1,29 @@
+{
+  "name": "livechat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "css-duration": "^0.3.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-vue": "^5.16.0",
+    "http": "0.0.1-security",
+    "mongoose": "^5.12.7",
+    "uuid": "^8.3.2",
+    "ws": "^7.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://https://github.com/boraoksuzoglu/livechat"
+  }
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panda Chat</title>
+    <link rel="shortcut icon" href="../public/profile.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="../public/styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-weight: 500;
+            color: white;
+            overflow: hidden;
+        }
+        h1 {
+            font-weight: 600;
+        }
+        .form, .form-control, .alert {
+            background: rgba( 255, 255, 255, 0.25 );
+            box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+            backdrop-filter: blur( 12.0px );
+            -webkit-backdrop-filter: blur( 12.0px );
+            border-radius: 10px;
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+        }
+        .form {
+            flex-direction: column;
+            padding: 3rem 0 3rem 0;
+        }
+        form {
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            display: flex;
+        }
+        input[type=text] {
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .btn {
+            margin: 0.8rem;
+            padding: 0.5rem 2rem;
+            background-color: black;
+            color: white;
+        } .btn:hover {
+            color: rgb(218, 218, 218);
+        }
+        .form-control {
+            width: auto;
+            text-align: center;
+        }
+        .form-control-color {
+            width: 50px;
+
+        }
+        #logo {
+            height: 128px;
+        }
+        #signature {
+            font-weight: 600;
+        }
+        .alert {
+            padding: .50rem 1rem;
+            color: rgb(211, 9, 9);
+            background: rgba(255, 145, 145, 0.25);
+        }
+        @media screen and ( max-width: 600px) {
+            #logo {
+                height: 96px;
+            }
+        }
+        @media screen and ( max-width: 300px) {
+            #logo {
+                height: 64px;
+            }
+        }
+    </style>
+</head>
+<body style="background-color: #FFFFFF; text-align: center;">
+    <div class="container m-auto" style="display: flex; height: 100vh;">
+        <div class="form m-auto col-sm-12 col-md-10">
+            <% const color = Math.floor(Math.random()*16777215).toString(16) %>
+            <form action="/login" method="POST">
+                <img id="logo" src="../public/profile.png" alt="">
+                <h1>Panda Chat</h1>
+                <h4 class="mb-3">Talk freely whatever you want. Panda will protect you.</h4>
+                <input class="form-control" type="text" placeholder="Enter your username" id="username" name="username" required>
+                <input class="form-control" type="text" placeholder="Enter chat name" id="chat" name="chat" required>
+                <input class="form-control form-control-color" type="color" id="hex" name="hex" value="#<%=color%>">
+                <% if (error == 01) { %>
+
+                    <div class="alert mt-3 mb-1" role="alert">
+                        <p>A user with same username is already in chat.</p>
+                    </div>
+
+                <%}%>
+            
+                <% if (error == 02) { %>
+            
+                    <div class="alert mt-3 mb-1" role="alert">
+                        <p style="font-size: small;">Username and Channel must be longer than 3 character, less than 16 character.</p>
+                    </div>
+
+                <%}%>
+
+                <input class="btn" type="submit" value="Login">
+                <p>We do not keep any messages in our database.</p>
+                <p>Privacy is the most important thing to us. We don't know who you are.</p>
+                <p style="margin-top: 2rem;">Developed by <a id="signature" style="color: #<%=color%>;" href="https://boraoksuzoglu.com">Bora Öksüzoğlu</a></p>
+                <a id="signature" style="font-size: smaller; color: #<%=color%>;" href="https://github.com/boraoksuzoglu/pandachat">github.com/boraoksuzoglu/pandachat</a>    
+
+            </form>
+        </div>
+
+
+    </div>
+    <script>
+        const background = [
+            {
+                "background": "https://wallpaperaccess.com/full/562233.jpg",
+                "color": "#fff"
+            }, {
+                "background": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/07f7a6bb-2d35-4630-93fc-be249af22b3e/dahj9x5-54e75f7b-c0e0-4226-9043-3711bf889f13.jpg/v1/fill/w_900,h_507,q_75,strp/panda_wallpaper_by_apofiss_dahj9x5-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD01MDciLCJwYXRoIjoiXC9mXC8wN2Y3YTZiYi0yZDM1LTQ2MzAtOTNmYy1iZTI0OWFmMjJiM2VcL2RhaGo5eDUtNTRlNzVmN2ItYzBlMC00MjI2LTkwNDMtMzcxMWJmODg5ZjEzLmpwZyIsIndpZHRoIjoiPD05MDAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.CCYuWarLR8ez1uRqFKAWq8hJFAcp6nuXBCVoB_8y9HM",
+                "color": "#fff"
+            }, {
+                "background": "https://i.pinimg.com/originals/3f/56/84/3f56843665b71e07dcf801af85a87665.jpg",
+                "color": "#fff"
+            }
+        ]
+
+        const value = background[Math.floor(Math.random() * background.length)]
+        document.querySelector("body").style.color = value.color
+        document.querySelector("body").style.backgroundImage = `url("${value.background}")`
+
+    </script>
+    <script>
+        document.getElementById("hex").addEventListener("change", function(event) {
+
+            document.querySelectorAll("#signature").forEach(element => element.style.color = document.getElementById("hex").value)
+        })
+    </script>
+</body>
+</html>

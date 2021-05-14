@@ -1,0 +1,175 @@
+$color: #08e69c
+
+html
+    height: 100vh
+
+* 
+    margin: 0
+    padding: 0
+    font-family: 'Montserrat', sans-serif
+
+p
+    margin: 0
+
+body 
+    background-color: #FFFFFF
+    width: 100%
+    height: 100%
+    #full
+        padding: 1.5rem 2rem 1.5rem 2rem
+    .center 
+        align-items: center
+        justify-content: center
+        flex-direction: column
+    
+    .logo
+        margin-bottom: 1rem
+        img, h5
+            display: inline-block
+        h5
+            position: relative
+            top: 4px
+            margin-left: 0.3rem
+            font-weight: 600
+    .icon
+        background: #181818
+        border-radius: 50%
+        z-index: 10000
+        cursor: pointer
+        color: white
+        width: 32px
+        height: 32px
+        text-align: center
+        i
+            position: relative
+            top: 8px    
+    #messages
+        height: 90%
+        padding: 2rem 2rem 0 2rem
+        overflow: hidden
+        overflow-y: auto
+
+        .msg
+            margin: 0 0 1rem 0
+            animation-duration: 0.2s
+            .oppo
+                margin-right: 1rem
+            .self
+                margin-left: 1rem
+            .profile
+                vertical-align: top
+            .profile, .msgbox
+                display: inline-block
+            .msgbox
+                padding: 1rem
+                border-radius: 5px
+                width: fit-content
+                word-break: break-all
+                background-color: rgba(red($color), green($color), blue($color), 0.1)
+                #username
+                    font-size: 0.8rem
+                    color: $color
+                    font-weight: 800
+
+
+    #messagebox
+        //position: fixed
+        width: 100%
+        margin-right: 2rem
+        padding-bottom: 3rem
+        #input
+            padding: 0 2rem 1rem 2rem
+            
+            .row
+                border-radius: 10px
+                background-color: #fff
+                padding: 1.8rem
+                .btn
+                    background-color: #181818
+                    color: white
+                input
+                    border: 3px solid #F2F2F2
+                    border-radius: 10px
+                input, .btn
+                    padding: 0.8rem 0.5rem 0.8rem 0.5rem
+            
+
+
+    .bg-gray
+        background-color: #F2F2F2
+        border-radius: 5px
+
+    .profile-section
+        display: flex
+        text-align: center
+        padding: 5rem
+
+        h5
+            margin-top: 1rem
+            font-weight: 800
+        .profile
+            overflow: visible
+            margin: auto
+
+    .profile
+        background-color: $color
+        border-radius: 50%
+        height: 128px
+        width: 128px
+        overflow: hidden
+        text-align: center
+        padding-left: 0
+
+        img
+            position: relative
+            top: 30px
+    .mini-profile
+        height: 80px
+        width: 80px
+        img
+            top: 18px
+    .stats
+        margin: 2rem 0 0.5rem 0
+        h5, p
+            display: inline-block
+            font-weight: 600
+        p
+            float: right
+            font-weight: 800
+            color: #cecece
+    ul
+        padding-left: 0
+        list-style: none
+        overflow-y: auto
+        .user_element
+            margin: 0 0 0.1rem 0
+            background-color: rgba(red($color), green($color), blue($color), 0.05)
+            padding: 0.5rem
+            border-radius: 5px
+
+            p
+                position: relative
+                bottom: 32px
+                margin-left: 1rem
+                font-weight: 600
+                font-size: 1.1rem
+            .mini-profile, p
+                display: inline-block
+
+@media screen and ( max-width: 1297px )
+    body #messages .msg .profile
+        display: none
+    body #messagebox #input .row
+        padding: 1rem
+
+@media screen and ( max-width: 992px)
+    #messagebox
+        margin-right: 0 !important
+    #full
+        padding: 1.5rem 1rem 1rem 1rem !important
+@media screen and ( max-width:  450px)
+    body #messagebox #input .row 
+        padding: 1rem 0.3rem 1rem 0.3rem
+        i
+            display: none
+    
