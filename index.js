@@ -10,7 +10,6 @@ const uuid = require("uuid")
 const wss = new WebSocket.Server({
     server: server
 });
-var rateLimit = require('./ratelimit')('0.6s', 1)
 const hexRgb = (hex) => {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -66,7 +65,18 @@ var USER_CONNECTION_TIMEOUTS = {}
 
 wss.on('connection', function connection(ws, req) {
 
-    rateLimit(ws)
+    ws.rateLimit = 0
+    ws.limitedMessages = []
+    setInterval(() => {
+        ws.rateLimit = 0
+        if (ws.limitedMessages.length > 0) {
+            ws.limitedMessages.forEach(message => {
+                ws.limitedMessages = ws.limitedMessages.filter(msg => msg != message)
+                ws.emit("message", message)
+            })
+        }
+    }, 500)
+
     ws.on('close', async function disconnect() {
         console.log(ws.user + " disconnected.")
 
@@ -84,6 +94,7 @@ wss.on('connection', function connection(ws, req) {
 
             await chatData.updateOne({channelID: ws.room}, {$pull: {users: { token: ws.user }}}, {safe: true})
             await chatData.deleteMany({users: {$size: 0}})
+            
         }, 1500)
     });
 
@@ -93,29 +104,35 @@ wss.on('connection', function connection(ws, req) {
         if (jsonData.type == "message") {
 
             const {token,message} = jsonData.data
+            // Message length condition
             if (message.length < 1) return
-            const userChat = await chatData.findOne({"users.token": token})
-            const userInfo = userChat['users'].find(user => user.token == token)
-
-            wss.clients.forEach((client) => {
-    
-                if (client.readyState === WebSocket.OPEN && client.room == userChat.channelID) {
-    
-                    client.send(JSON.stringify({
-                        type: "message",
-                        data: {
-                            channelID: userChat.channelID,
-                            message: message,
-                            oppo: client !== ws,
-                            author: {
-                                username: userInfo.username,
-                                color: userInfo.color,
-                            }
-                        }
-                    }))
+            // Rate limit condition
+            if (ws.rateLimit < 1) {
+                ws.rateLimit++
+                const userChat = await chatData.findOne({"users.token": token})
+                const userInfo = userChat['users'].find(user => user.token == token)
+                wss.clients.forEach((client) => {
         
-                }
-            });
+                    if (client.readyState === WebSocket.OPEN && client.room == userChat.channelID) {
+        
+                        client.send(JSON.stringify({
+                            type: "message",
+                            data: {
+                                channelID: userChat.channelID,
+                                message: message,
+                                oppo: client !== ws,
+                                author: {
+                                    username: userInfo.username,
+                                    color: userInfo.color,
+                                }
+                            }
+                        }))
+            
+                    }
+                });
+            } else {
+                ws.limitedMessages.push(data)
+            }
 
         } else if (jsonData.type == "login") {
 
