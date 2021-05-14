@@ -111,7 +111,7 @@ wss.on('connection', function connection(ws, req) {
                                 color: userInfo.color,
                             }
                         }
-                    }));
+                    }))
         
                 }
             });
@@ -169,10 +169,8 @@ app.post('/login', async (req, res) => {
 
     if (req.body.chat.length < 3 || req.body.username.length < 3 || req.body.chat.length > 16 || req.body.username.length > 16) {
         
-        
-        res.render("index.ejs", {error: 02})
-        return
-        
+        return res.render("index.ejs", {error: 02})
+
     }
 
     let chatExist = await chatData.exists({
@@ -185,7 +183,7 @@ app.post('/login', async (req, res) => {
     if (!chatExist) {
         // Channel doesn't exist
         // CREATE ONE!
-        await req.session.regenerate(function () {
+        req.session.regenerate(function () {
             req.session.chat = req.body.chat
             req.session.token = token
             res.redirect('/')
@@ -214,7 +212,7 @@ app.post('/login', async (req, res) => {
             }}
         )
 
-        await req.session.regenerate(function () {
+        req.session.regenerate(function () {
             req.session.token = token
             req.session.chat = req.body.chat
             res.redirect('/');
@@ -225,7 +223,6 @@ app.post('/login', async (req, res) => {
         // Change Username and TRY AGAIN!
         
         res.render("index.ejs", {error: 01})
-        res.redirect('index.ejs')
     }
 
 })
@@ -237,7 +234,6 @@ server.listen(3000, async () => {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })
-    await chatData.deleteMany({})
 
 })
 
