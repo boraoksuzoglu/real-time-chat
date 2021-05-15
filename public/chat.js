@@ -1,10 +1,11 @@
 const socket = new WebSocket('ws://localhost:3000');
 socket.addEventListener('open', function (event) {
+    socket.token = document.getElementById("userToken").innerHTML
     socket.send(JSON.stringify({
         type: "login",
         data: {
             chat: document.getElementById("chat").innerHTML,
-            user: document.getElementById("userToken").innerHTML
+            user: socket.token
         }
     }))
     
@@ -98,16 +99,12 @@ socket.addEventListener("message", function (data) {
     if (jsonData.type == "join" || jsonData.type == "leave" || jsonData.type == "message" && jsonData.data.oppo) {
         const scrolldown = document.getElementById("scrolldown")
         const allMessages = document.querySelectorAll(".msg")
-        if (Number(messageBox.scrollHeight - messageBox.clientHeight - messageBox.scrollTop) < allMessages[allMessages.length-1].clientHeight + allMessages[allMessages.length-2].clientHeight) {
+        if (Number(messageBox.scrollHeight - messageBox.clientHeight - messageBox.scrollTop) <= allMessages[allMessages.length-1].clientHeight + allMessages[allMessages.length-2].clientHeight) {
             document.getElementById("messages").scrollTo(0, document.getElementById("messages").scrollHeight);
             scrolldown.style.display = "none"
-            scrolldown.classList.remove("animate__delay-2s")
         } else {
             scrolldown.style.display = "block"
             scrolldown.classList.add("animate__bounce")
-            scrolldown.addEventListener("animationstart", () => {
-                scrolldown.classList.add("animate__delay-2s")
-            })
         }
     }
 
@@ -126,7 +123,7 @@ document.getElementById("sendmsg").onclick = () => {
         type: "message",
         data: {
             message: document.getElementById("message").value,
-            token: document.getElementById("userToken").innerHTML
+            token: socket.token
         }
     }))
     document.getElementById("message").value = ""

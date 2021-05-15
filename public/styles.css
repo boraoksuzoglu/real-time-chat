@@ -59,6 +59,12 @@ body .icon {
   width: 32px;
   height: 32px;
   text-align: center;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
 }
 
 body .icon i {

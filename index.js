@@ -105,7 +105,7 @@ wss.on('connection', function connection(ws, req) {
 
             const {token,message} = jsonData.data
             // Message length condition
-            if (message.length < 1) return
+            if (message.length < 1 || token == undefined) return
             // Rate limit condition
             if (ws.rateLimit < 1) {
                 ws.rateLimit++
