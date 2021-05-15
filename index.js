@@ -111,7 +111,7 @@ wss.on('connection', function connection(ws, req) {
                 ws.rateLimit++
                 const userChat = await chatData.findOne({"users.token": token})
                 const userInfo = userChat['users'].find(user => user.token == token)
-                wss.clients.forEach((client) => {
+                return wss.clients.forEach((client) => {
         
                     if (client.readyState === WebSocket.OPEN && client.room == userChat.channelID) {
         
@@ -130,9 +130,8 @@ wss.on('connection', function connection(ws, req) {
             
                     }
                 });
-            } else {
-                ws.limitedMessages.push(data)
             }
+            ws.limitedMessages.push(data)
 
         } else if (jsonData.type == "login") {
 
@@ -161,9 +160,6 @@ wss.on('connection', function connection(ws, req) {
 
         }
 
-    })
-    ws.on('limited', data => {
-        ws.send(JSON.stringify({type: "ratelimit"}))
     })
 
 });
