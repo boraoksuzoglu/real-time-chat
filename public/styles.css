@@ -19,7 +19,7 @@ body {
 }
 
 body #full {
-  padding: 1.5rem 2rem 1.5rem 2rem;
+  padding: 1.5rem 2rem;
 }
 
 body .center {
@@ -74,13 +74,13 @@ body .icon i {
 
 body #messages {
   height: 90%;
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem 2rem 0;
   overflow: hidden;
   overflow-y: auto;
 }
 
 body #messages .msg {
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   -webkit-animation-duration: 0.2s;
           animation-duration: 0.2s;
 }
@@ -144,7 +144,7 @@ body #messagebox #input .row input {
 }
 
 body #messagebox #input .row input, body #messagebox #input .row .btn {
-  padding: 0.8rem 0.5rem 0.8rem 0.5rem;
+  padding: 0.8rem 0.5rem;
 }
 
 body .bg-gray {
@@ -195,7 +195,7 @@ body .mini-profile img {
 }
 
 body .stats {
-  margin: 2rem 0 0.5rem 0;
+  margin: 2rem 0 0.5rem;
 }
 
 body .stats h5, body .stats p {
@@ -216,7 +216,7 @@ body ul {
 }
 
 body ul .user_element {
-  margin: 0 0 0.1rem 0;
+  margin: 0 0 0.1rem;
   background-color: rgba(8, 230, 156, 0.05);
   padding: 0.5rem;
   border-radius: 5px;
@@ -248,13 +248,13 @@ body ul .user_element .mini-profile, body ul .user_element p {
     margin-right: 0 !important;
   }
   #full {
-    padding: 1.5rem 1rem 1rem 1rem !important;
+    padding: 1.5rem 1rem 1rem !important;
   }
 }
 
 @media screen and (max-width: 450px) {
   body #messagebox #input .row {
-    padding: 1rem 0.3rem 1rem 0.3rem;
+    padding: 1rem 0.3rem;
   }
   body #messagebox #input .row i {
     display: none;
