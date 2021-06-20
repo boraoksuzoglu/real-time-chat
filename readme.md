@@ -1,14 +1,14 @@
-# Panda Chat
-Talk freely whatever you want. Panda will protect you.
+# Real Time Chat
+Real time group chat application with Node.js.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/boraoksuzoglu/panda-chat/badge)](https://www.codefactor.io/repository/github/boraoksuzoglu/panda-chat)
+[![CodeFactor](https://www.codefactor.io/repository/github/boraoksuzoglu/real-time-chat/badge)](https://www.codefactor.io/repository/github/boraoksuzoglu/real-time-chat)
 
 ---
 
 ## Installation & Setup
 ### Install Repository
 ```git
-git clone https://github.com/boraoksuzoglu/Panda-Chat
+git clone https://github.com/boraoksuzoglu/real-time-chat
 ```
 
 ### Install Node Modules
