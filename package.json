@@ -1,11 +1,11 @@
 {
-  "name": "livechat",
+  "name": "real-time-chat",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "devStart": "nodemon index.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/boraoksuzoglu/Panda-Chat"
+    "url": "https://github.com/boraoksuzoglu/real-time-chat"
   }
 }
