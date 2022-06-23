@@ -16,10 +16,20 @@ git clone https://github.com/boraoksuzoglu/real-time-chat
 npm install
 ```
 
+### Setup .env
+```env
+MONGODB=<ENTER_MONGODB_URL_HERE>
+```
+
 ### Run Project
 ```git
 npm start
 ```
 
-### Finish
+### Finish!
 Now your project is running on **https://localhost:3000**
+
+---
+## Images & Gifs
+![login_page](./.github/loginpage.png)
+![chatting_page](./.github/chatting.png)
