@@ -1,28 +1,20 @@
-
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
-const uri = require("./config.json").mongodb
+const dotenv = require("dotenv").config()
+const uri = process.env.MONGODB
+const path = require("path")
 const session = require('express-session');
 const server = require('http').createServer(app);
 const WebSocket = require('ws');
-const uuid = require("uuid")
 const wss = new WebSocket.Server({
     server: server
 });
-const hexRgb = (hex) => {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-}
 
 app.set('view-engine', 'ejs')
 app.set('trust proxy', 1)
-app.use('/public', express.static(__dirname + '/public'));
-app.use('index', express.static(__dirname + 'index'))
+app.use('/public', express.static(path.join(__dirname, "..", "/public")))
+app.set('views', path.join(__dirname, 'views'))
 app.use(session({
     resave: false,
     saveUninitialized: false,
@@ -31,36 +23,12 @@ app.use(session({
 app.use(express.urlencoded({
     extended: false
 }))
+// router
+app.use("/", require("./routes"))
 
-// Models
+// WEBSOCKET
+
 const chatData = require('./models/chat')
-
-app.get('/', async (req, res) => {
-
-    if (!req.session.token && !req.session.chat ||
-        !await chatData.exists({channelID: req.session.chat}) || 
-        !await chatData.exists({channelID: req.session.chat, "users.token": req.session.token})) {
-
-            if (req.session.token || req.session.chat) req.session.destroy()
-            return res.render('index.ejs', {error: 0})
-
-    }
-
-    else {
-
-        const userData = await chatData.findOne({channelID: req.session.chat})
-        const {username, color} = userData["users"].find(user => user.token == req.session.token)
-
-        res.render("chat.ejs", {
-            username: username,
-            chat: req.session.chat,
-            token: req.session.token,
-            color: color,
-            users: userData['users'].map(value => {return {username: value.username, color: value.color}})
-        })
-    }
-})
-
 var USER_CONNECTION_TIMEOUTS = {}
 
 wss.on('connection', function connection(ws, req) {
@@ -162,83 +130,6 @@ wss.on('connection', function connection(ws, req) {
 
     })
 
-});
-
-app.post('/logout', async (req, res) => {
-
-    wss.clients.forEach(client => {
-        if (client.user == req.session.token) {
-
-            return client.close()
-
-        }
-    })
-
-    req.session.destroy()
-    res.redirect("/")
-
-})
-
-app.post('/login', async (req, res) => {
-
-    if (req.body.chat.length < 3 || req.body.username.length < 3 || req.body.chat.length > 16 || req.body.username.length > 16) {
-        
-        return res.render("index.ejs", {error: 02})
-
-    }
-
-    let chatExist = await chatData.exists({
-        channelID: req.body.chat
-    })
-    let userExist = await chatData.exists({
-        channelID: req.body.chat, "users.username": req.body.username
-    })
-    let token = uuid.v4();
-    if (!chatExist) {
-        // Channel doesn't exist
-        // CREATE ONE!
-        req.session.regenerate(function () {
-            req.session.chat = req.body.chat
-            req.session.token = token
-            res.redirect('/')
-
-        });
-        await chatData.create({
-            channelID: req.body.chat,
-            users: {
-                username: req.body.username,
-                token: token,
-                color: hexRgb(req.body.hex)
-            }
-        })
-
-    } else if (!userExist) {
-        // Channel exist, User doesn't exist
-        // JOIN CHANNEL!
-        await chatData.updateOne({
-            channelID: req.body.chat},
-            {$push: {
-                users: {
-                    username: req.body.username,
-                    token: token,   
-                    color: hexRgb(req.body.hex)
-                }
-            }}
-        )
-
-        req.session.regenerate(function () {
-            req.session.token = token
-            req.session.chat = req.body.chat
-            res.redirect('/');
-        });
-
-    } else {
-        // Channel exist, User exist
-        // Change Username and TRY AGAIN!
-        
-        res.render("index.ejs", {error: 01})
-    }
-
 })
 
 server.listen(3000, async () => {
@@ -248,7 +139,7 @@ server.listen(3000, async () => {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })
-    await chatData.deleteMany({})
+    await require('./models/chat').deleteMany({})
 
 })
 
