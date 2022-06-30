@@ -69,7 +69,12 @@ wss.on('connection', function connection(ws, req) {
 
     ws.on('message', async function incoming(data) {
 
-        const jsonData = JSON.parse(data)
+        let jsonData;
+        try {
+          	jsonData = JSON.parse(data)
+        } catch (e) {
+          	return // ws.send
+        }
         if (jsonData.type == "message") {
 
             let {token,message} = jsonData.data
