@@ -51,8 +51,8 @@ socket.addEventListener("message", function (data) {
         document.getElementById("totalUsers").innerText = Number(document.getElementById("totalUsers").innerText) - 1
 
     } else if (jsonData.type == "message") {
-        var author = HTMLUtils.escape(jsonData.data.author.username)
-        var message = HTMLUtils.escape(jsonData.data.message)
+        var author = jsonData.data.author.username
+        var message = jsonData.data.message
         
         if (jsonData.data.oppo) {
 
@@ -141,39 +141,3 @@ document.getElementById("scrolldown").onclick = () => {
     document.getElementById("messages").scrollTo(0, document.getElementById("messages").scrollHeight);
 
 }
-
-var HTMLUtils = new function () {
-    var rules = [{
-            expression: /&/g,
-            replacement: '&amp;'
-        },
-        {
-            expression: /</g,
-            replacement: '&lt;'
-        },
-        {
-            expression: />/g,
-            replacement: '&gt;'
-        },
-        {
-            expression: /"/g,
-            replacement: '&quot;'
-        },
-        {
-            expression: /'/g,
-            replacement: '&#039;'
-        }
-    ];
-
-    this.escape = function (html) {
-        var result = html;
-
-        for (var i = 0; i < rules.length; ++i) {
-            var rule = rules[i];
-
-            result = result.replace(rule.expression, rule.replacement);
-        }
-
-        return result;
-    }
-};

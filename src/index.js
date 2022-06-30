@@ -10,6 +10,7 @@ const WebSocket = require('ws');
 const wss = new WebSocket.Server({
     server: server
 });
+const HtmlUtils = require("./utils/HtmlUtils")
 
 app.set('view-engine', 'ejs')
 app.set('trust proxy', 1)
@@ -71,7 +72,8 @@ wss.on('connection', function connection(ws, req) {
         const jsonData = JSON.parse(data)
         if (jsonData.type == "message") {
 
-            const {token,message} = jsonData.data
+            let {token,message} = jsonData.data
+            message = HtmlUtils.escape(message)
             // Message length condition
             if (message.length < 1 || token == undefined) return
             // Rate limit condition
@@ -104,8 +106,8 @@ wss.on('connection', function connection(ws, req) {
         } else if (jsonData.type == "login") {
 
             const {chat, user} = jsonData.data
-            ws.room = chat
-            ws.user = user
+            ws.room = HtmlUtils.escape(chat)
+            ws.user = HtmlUtils.escape(user)
 
             console.log(ws.user + ' connected');
 
