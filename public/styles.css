@@ -1,263 +1,268 @@
 html {
-  height: 100vh;
+	height: 100vh;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	padding: 0;
+	font-family: 'Montserrat', sans-serif;
 }
 
 p {
-  margin: 0;
+	margin: 0;
 }
 
 body {
-  background-color: #FFFFFF;
-  width: 100%;
-  height: 100%;
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
 }
 
 body #full {
-  padding: 1.5rem 2rem;
+	padding: 1.5rem 2rem;
 }
 
 body .center {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
 }
 
 body .logo {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
-body .logo img, body .logo h5 {
-  display: inline-block;
+body .logo img,
+body .logo h5 {
+	display: inline-block;
 }
 
 body .logo h5 {
-  position: relative;
-  top: 4px;
-  margin-left: 0.3rem;
-  font-weight: 600;
+	position: relative;
+	top: 4px;
+	margin-left: 0.3rem;
+	font-weight: 600;
 }
 
 body .icon {
-  background: #181818;
-  border-radius: 50%;
-  z-index: 10000;
-  cursor: pointer;
-  color: white;
-  width: 32px;
-  height: 32px;
-  text-align: center;
-  -webkit-animation-duration: 1.5s;
-          animation-duration: 1.5s;
-  -webkit-animation-delay: 0s;
-          animation-delay: 0s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+	background: #181818;
+	border-radius: 50%;
+	z-index: 10000;
+	cursor: pointer;
+	color: white;
+	width: 32px;
+	height: 32px;
+	text-align: center;
+	-webkit-animation-duration: 1.5s;
+	animation-duration: 1.5s;
+	-webkit-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
 }
 
 body .icon i {
-  position: relative;
-  top: 8px;
+	position: relative;
+	top: 8px;
 }
 
 body #messages {
-  height: 90%;
-  padding: 2rem 0 0;
-  overflow: hidden;
-  overflow-y: auto;
+	height: 90%;
+	padding: 2rem 0 0;
+	overflow: hidden;
+	overflow-y: auto;
 }
 
 body #messages .msg {
-  margin: 0 0 1rem;
-  -webkit-animation-duration: 0.2s;
-          animation-duration: 0.2s;
+	margin: 0 0 1rem;
+	-webkit-animation-duration: 0.2s;
+	animation-duration: 0.2s;
 }
 
 body #messages .msg .oppo {
-  margin-right: 1rem;
+	margin-right: 1rem;
 }
 
 body #messages .msg .self {
-  margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 body #messages .msg .profile {
-  vertical-align: top;
+	vertical-align: top;
 }
 
-body #messages .msg .profile, body #messages .msg .msgbox {
-  display: inline-block;
+body #messages .msg .profile,
+body #messages .msg .msgbox {
+	display: inline-block;
 }
 
 body #messages .msg .msgbox {
-  padding: 1rem;
-  border-radius: 5px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  word-break: break-all;
-  background-color: rgba(8, 230, 156, 0.1);
+	padding: 1rem;
+	border-radius: 5px;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	word-break: break-all;
+	background-color: rgba(8, 230, 156, 0.1);
 }
 
 body #messages .msg .msgbox #username {
-  font-size: 0.8rem;
-  color: #08e69c;
-  font-weight: 800;
+	font-size: 0.8rem;
+	color: #08e69c;
+	font-weight: 800;
 }
 
 body #messagebox {
-  width: 100%;
-  margin-right: 2rem;
-  padding-bottom: 3rem;
+	width: 100%;
+	margin-right: 2rem;
+	padding-bottom: 3rem;
 }
 
 body #messagebox #input {
-  padding: 0 2rem 1rem;
+	padding: 0 2rem 1rem;
 }
 
 body #messagebox #input .row {
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 1.8rem;
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 1.8rem;
 }
 
 body #messagebox #input .row .btn {
-  background-color: #181818;
-  color: white;
+	background-color: #181818;
+	color: white;
 }
 
 body #messagebox #input .row input {
-  border: 3px solid #F2F2F2;
-  border-radius: 10px;
+	border: 3px solid #f2f2f2;
+	border-radius: 10px;
 }
 
-body #messagebox #input .row input, body #messagebox #input .row .btn {
-  padding: 0.8rem 0.5rem;
+body #messagebox #input .row input,
+body #messagebox #input .row .btn {
+	padding: 0.8rem 0.5rem;
 }
 
 body .bg-gray {
-  background-color: #F2F2F2;
-  border-radius: 5px;
+	background-color: #f2f2f2;
+	border-radius: 5px;
 }
 
 body .profile-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  text-align: center;
-  padding: 5rem;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	text-align: center;
+	padding: 5rem;
 }
 
 body .profile-section h5 {
-  margin-top: 1rem;
-  font-weight: 800;
+	margin-top: 1rem;
+	font-weight: 800;
 }
 
 body .profile-section .profile {
-  overflow: visible;
-  margin: auto;
+	overflow: visible;
+	margin: auto;
 }
 
 body .profile {
-  background-color: #08e69c;
-  border-radius: 50%;
-  height: 128px;
-  width: 128px;
-  overflow: hidden;
-  text-align: center;
-  padding-left: 0;
+	background-color: #08e69c;
+	border-radius: 50%;
+	height: 128px;
+	width: 128px;
+	overflow: hidden;
+	text-align: center;
+	padding-left: 0;
 }
 
 body .profile img {
-  position: relative;
-  top: 30px;
+	position: relative;
+	top: 30px;
 }
 
 body .mini-profile {
-  height: 80px;
-  width: 80px;
+	height: 80px;
+	width: 80px;
 }
 
 body .mini-profile img {
-  top: 18px;
+	top: 18px;
 }
 
 body .stats {
-  margin: 2rem 0 0.5rem;
+	margin: 2rem 0 0.5rem;
 }
 
-body .stats h5, body .stats p {
-  display: inline-block;
-  font-weight: 600;
+body .stats h5,
+body .stats p {
+	display: inline-block;
+	font-weight: 600;
 }
 
 body .stats p {
-  float: right;
-  font-weight: 800;
-  color: #cecece;
+	float: right;
+	font-weight: 800;
+	color: #cecece;
 }
 
 body ul {
-  padding-left: 0;
-  list-style: none;
-  overflow-y: auto;
+	padding-left: 0;
+	list-style: none;
+	overflow-y: auto;
 }
 
 body ul .user_element {
-  margin: 0 0 0.1rem;
-  background-color: rgba(8, 230, 156, 0.05);
-  padding: 0.5rem;
-  border-radius: 5px;
+	margin: 0 0 0.1rem;
+	background-color: rgba(8, 230, 156, 0.05);
+	padding: 0.5rem;
+	border-radius: 5px;
 }
 
 body ul .user_element p {
-  position: relative;
-  bottom: 32px;
-  margin-left: 1rem;
-  font-weight: 600;
-  font-size: 1.1rem;
+	position: relative;
+	bottom: 32px;
+	margin-left: 1rem;
+	font-weight: 600;
+	font-size: 1.1rem;
 }
 
-body ul .user_element .mini-profile, body ul .user_element p {
-  display: inline-block;
+body ul .user_element .mini-profile,
+body ul .user_element p {
+	display: inline-block;
 }
 
 @media screen and (max-width: 1297px) {
-  body #messages .msg .profile {
-    display: none;
-  }
-  body #messagebox #input .row {
-    padding: 1rem;
-  }
+	body #messages .msg .profile {
+		display: none;
+	}
+	body #messagebox #input .row {
+		padding: 1rem;
+	}
 }
 
 @media screen and (max-width: 992px) {
-  #messagebox {
-    margin-right: 0 !important;
-  }
-  #full {
-    padding: 1.5rem 1rem 1rem !important;
-  }
+	#messagebox {
+		margin-right: 0 !important;
+	}
+	#full {
+		padding: 1.5rem 1rem 1rem !important;
+	}
 }
 
 @media screen and (max-width: 450px) {
-  body #messagebox #input .row {
-    padding: 1rem 0.3rem;
-  }
-  body #messagebox #input .row i {
-    display: none;
-  }
+	body #messagebox #input .row {
+		padding: 1rem 0.3rem;
+	}
+	body #messagebox #input .row i {
+		display: none;
+	}
 }
 /*# sourceMappingURL=styles.css.map */

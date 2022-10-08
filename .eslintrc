@@ -1,0 +1,28 @@
+{
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"es2021": true,
+		"jest/globals": true,
+		"node": true
+	},
+	"extends": ["eslint:recommended", "prettier"],
+	"overrides": [],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"indent": ["error", "tab"],
+		"linebreak-style": ["error", "unix"],
+		"quotes": ["error", "single"],
+		"semi": ["error", "never"]
+		/*"array-element-newline": [
+			"error",
+			{
+				"ArrayExpression": "consistent",
+				"ArrayPattern": { "minItems": 3 }
+			}
+		]*/
+	},
+	"plugins": ["prettier", "jest"]
+}
