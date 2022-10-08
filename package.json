@@ -1,30 +1,36 @@
 {
-  "name": "real-time-chat",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^16.0.1",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "http": "0.0.1-security",
-    "mongoose": "^6.5.1",
-    "path": "^0.12.7",
-    "uuid": "^8.3.2",
-    "ws": "^7.4.5"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/boraoksuzoglu/real-time-chat"
-  }
+	"name": "real-time-chat",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "nodemon src/index.js",
+		"start": "node src/index.js",
+		"lint": "eslint ./src --ext .js"
+	},
+	"author": "boraoksuzoglu",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.0.1",
+		"ejs": "^3.1.6",
+		"express": "^4.17.1",
+		"express-session": "^1.17.1",
+		"http": "0.0.1-security",
+		"mongoose": "^5.12.7",
+		"path": "^0.12.7",
+		"uuid": "^8.3.2",
+		"ws": "^7.4.5"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.7",
+		"eslint": "^8.22.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-jest": "^26.8.4",
+		"eslint-plugin-prettier": "^4.2.1",
+		"prettier": "^2.7.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/boraoksuzoglu/real-time-chat"
+	}
 }

@@ -1,116 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Panda Chat</title>
+		<link rel="shortcut icon" href="../public/profile.png" type="image/x-icon" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../public/styles.css" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panda Chat</title>
-    <link rel="shortcut icon" href="../public/profile.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link rel="stylesheet" href="../public/styles.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css">
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+	</head>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-</head>
+	<body>
+		<div id="full" class="container-fluid h-100">
+			<div class="row h-100">
+				<div class="col-12 col-lg-4 col-xl-3">
+					<div class="logo">
+						<img src="../public/profile.png" width="32px" alt="" />
+						<h5>PandaChat</h5>
+					</div>
 
-<body>
+					<div class="col-12 bg-gray profile-section">
+						<i
+							id="logout"
+							style="font-size: 1.5rem; position: absolute; top: 25px; right: 25px; cursor: pointer"
+							class="far fa-sign-out-alt"
+						></i>
 
-    <div id="full" class="container-fluid h-100">
-        <div class="row h-100">
-            <div class="col-12 col-lg-4 col-xl-3">
+						<div class="userInfo m-auto">
+							<div
+								class="profile mb-2 m-auto"
+								id="userprofile"
+								style="background-color: rgba(<%= color.r %>, <%= color.g %>, <%= color.b %>, 1)"
+							>
+								<img src="../public/profile.png" width="128px" alt="" />
+							</div>
 
-                <div class="logo">
-                    <img src="../public/profile.png" width="32px" alt="">
-                    <h5>PandaChat</h5>
-                </div>
+							<h5><%= username %></h5>
+							<p id="chat"><%= chat %></p>
+							<p id="userToken" style="display: none"><%= token %></p>
+						</div>
+					</div>
 
-                <div class="col-12 bg-gray profile-section">
-                    <i id="logout" style="font-size: 1.5rem; position: absolute; top: 25px; right: 25px; cursor: pointer;"
-                        class="far fa-sign-out-alt"></i>
+					<div class="col-12 stats">
+						<h5>Users</h5>
+						<p><span id="totalUsers"><%= users.length %></span> active users</p>
+					</div>
 
-                    <div class="userInfo m-auto">
+					<ul id="users">
+						<% users.forEach(user => {%>
+						<li
+							class="user_element"
+							style="
+								background-color: rgba(
+									<%= user.color.r %>,
+									<%= user.color.g %>,
+									<%= user.color.b %>,
+									0.1
+								);
+							"
+						>
+							<div
+								class="profile mini-profile"
+								style="
+									background-color: rgba(
+										<%= user.color.r %>,
+										<%= user.color.g %>,
+										<%= user.color.b %>,
+										1
+									);
+								"
+							>
+								<img src="../public/profile.png" width="80px" alt="" />
+							</div>
+							<p><%=user.username%></p>
+						</li>
+						<% }) %>
+					</ul>
+				</div>
+				<div class="col-12 col-lg-8 col-xl-9 h-100">
+					<div id="messagebox" class="bg-gray h-100">
+						<div id="messages" onscroll="scrollFunc()"></div>
 
-                        <div class="profile mb-2 m-auto" id="userprofile"
-                            style="background-color: rgba(<%= color.r %>, <%= color.g %>, <%= color.b %>, 1);">
-                            <img src="../public/profile.png" width="128px" alt="">
-                        </div>
+						<div
+							id="scrolldown"
+							style="position: relative; float: right; right: 1.5rem; bottom: 3rem; display: none"
+							class="icon animate__animated"
+						>
+							<i class="fas fa-chevron-down"></i>
+						</div>
+						<div id="input" class="container-fluid" style="margin: 0">
+							<div class="row">
+								<div class="col-8 col-md-10 pr-0">
+									<input
+										type="text"
+										id="message"
+										style="width: 100%"
+										placeholder="Enter your message here"
+									/>
+								</div>
 
-                        <h5><%= username %></h5>
-                        <p id="chat"><%= chat %></p>
-                        <p id="userToken" style="display: none;"><%= token %></p>
+								<div class="col-4 col-md-2">
+									<div type="button" id="sendmsg" class="btn" style="width: inherit">
+										Send <i style="margin-left: 0.3rem" class="fas fa-share"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 
-
-                    </div>
-
-                </div>
-
-                <div class="col-12 stats">
-                    <h5>Users</h5>
-                    <p><span id="totalUsers"><%= users.length %></span> active users</p>
-                </div>
-
-                <ul id="users">
-                    <% users.forEach(user => {%>
-                    <li class="user_element"
-                        style="background-color: rgba(<%= user.color.r %>, <%= user.color.g %>, <%= user.color.b %>, 0.1);">
-                        <div class="profile mini-profile"
-                            style="background-color: rgba(<%= user.color.r %>, <%= user.color.g %>, <%= user.color.b %>, 1);">
-                            <img src="../public/profile.png" width="80px" alt="">
-                        </div>
-                        <p><%=user.username%></p>
-                    </li>
-                    <% }) %>
-
-                </ul>
-
-
-            </div>
-            <div class="col-12 col-lg-8 col-xl-9 h-100">
-
-                <div id="messagebox" class="bg-gray h-100">
-                    <div id="messages" onscroll="scrollFunc()">
-
-
-                    </div>
-
-                    <div id="scrolldown"
-                        style="position: relative; float: right; right: 1.5rem; bottom: 3rem; display: none;"
-                        class="icon animate__animated">
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div id="input" class="container-fluid" style="margin: 0;">
-
-                        <div class="row">
-                            <div class="col-8 col-md-10 pr-0">
-
-                                <input type="text" id="message" style="width: 100%;"
-                                    placeholder="Enter your message here">
-
-                            </div>
-
-                            <div class="col-4 col-md-2">
-
-                                <div type="button" id="sendmsg" class="btn" style="width: inherit;">Send <i
-                                        style="margin-left: 0.3rem;" class="fas fa-share"></i></div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</body>
-
-<script src="../public/chat.js"></script>
-<script src="../public/other.js"></script>
-
+	<script src="../public/chat.js"></script>
+	<script src="../public/other.js"></script>
 </html>
